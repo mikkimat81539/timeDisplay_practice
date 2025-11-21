@@ -2,11 +2,11 @@ import pygame, time
 
 pygame.init()
 
-class Timing:
+class displayTiming:
     def __init__(self, text):
         self.text = str(text)
 
-    def displayTime(self, screen):
+    def displayTimeFont(self, screen):
         createFont = pygame.font.SysFont("Arial", 30)
 
         renderFont = createFont.render(self.text, False, "black")

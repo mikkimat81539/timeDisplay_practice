@@ -1,16 +1,20 @@
 # Testing time display
 
 import pygame, time
-from display_time import Timing
+from display_time import displayTiming
 
 pygame.init()
+
+# CLOCK
+clock = pygame.time.Clock()
 
 # SCREEN
 screen = pygame.display.set_mode((500, 250))
 pygame.display.set_caption("Testing Time Display")
 
-# Time
-timeLimit = 10
+# TIME
+timeLimit = 60
+
 startTime = time.time()
 
 # Screen Loop
@@ -24,18 +28,22 @@ while running:
     screen.fill("white")
 
     # RENDER CODE HERE
+    
     endTime = time.time()
+
     elapsedTime = round((endTime - startTime), 2)
 
-    timer = timeLimit - int(elapsedTime)
+    keys = pygame.key.get_pressed()
 
-    key = pygame.key.get_pressed()
-    if key[pygame.K_RETURN]:
-        timer += 5
-        showTime = Timing(f"{timer}").displayTime(screen)
-    else:
-        showTime = Timing(f"{timer}").displayTime(screen)
-        
+    if keys[pygame.K_RETURN]:
+        timeLimit += 5
+
+    timer = timeLimit - int(elapsedTime)
+    
+    showTime = displayTiming(timer).displayTimeFont(screen)
+
     pygame.display.flip()
+
+    clock.tick(20)
 
 pygame.quit()
