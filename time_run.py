@@ -13,7 +13,7 @@ screen = pygame.display.set_mode((500, 250))
 pygame.display.set_caption("Testing Time Display")
 
 # TIME
-timeLimit = 60
+timeLimit = 20
 
 startTime = time.time()
 
@@ -36,11 +36,16 @@ while running:
     keys = pygame.key.get_pressed()
 
     if keys[pygame.K_RETURN]:
+        pygame.key.set_repeat(0)
         timeLimit += 5
 
     timer = timeLimit - int(elapsedTime)
+
+    if elapsedTime > timeLimit:
+        showTime = displayTiming("Game Over", 175, 100).displayTimeFont(screen)
+    else:
+        showTime = displayTiming(timer, 230, 100).displayTimeFont(screen)
     
-    showTime = displayTiming(timer).displayTimeFont(screen)
 
     pygame.display.flip()
 
